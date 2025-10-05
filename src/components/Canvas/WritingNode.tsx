@@ -1,7 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Group, Rect, Text } from 'react-konva';
+import React, { useRef, useState } from 'react';
+import { Group, Rect, Text, Circle } from 'react-konva';
 import { WritingNode as WritingNodeType } from '../../types/canvas';
 import { getNodeStyle } from '../../utils/nodeUtils';
+import { usePatternStore } from '../../stores/patternStore';
+import { IsolatedNodeDetection } from '../../types/patterns';
 import Konva from 'konva';
 
 interface WritingNodeProps {
@@ -22,8 +24,15 @@ export const WritingNode: React.FC<WritingNodeProps> = ({
 }) => {
   const groupRef = useRef<Konva.Group>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const { patterns } = usePatternStore();
 
   const style = getNodeStyle(node.type);
+
+  // Check if this node is isolated
+  const isolatedPattern = patterns.find(p => p.type === 'isolated');
+  const isIsolated = isolatedPattern
+    ? (isolatedPattern.data as IsolatedNodeDetection[]).some(d => d.nodeId === node.id)
+    : false;
 
   const handleDragStart = () => {
     setIsDragging(true);
@@ -98,6 +107,17 @@ export const WritingNode: React.FC<WritingNodeProps> = ({
             cornerRadius={2}
           />
         </>
+      )}
+
+      {/* Pattern indicators */}
+      {isIsolated && (
+        <Circle
+          x={node.width + 8}
+          y={-8}
+          radius={8}
+          fill="#FFA500"
+          opacity={0.7}
+        />
       )}
     </Group>
   );
