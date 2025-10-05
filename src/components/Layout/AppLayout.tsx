@@ -3,12 +3,14 @@ import { WritingCanvas } from '../Canvas/WritingCanvas';
 import { CanvasControls } from '../Canvas/CanvasControls';
 import { Toolbar } from '../UI/Toolbar';
 import { ExportPanel } from '../UI/ExportPanel';
+import { InterventionPanel } from '../UI/InterventionPanel';
 import { NodeType } from '../../types/canvas';
 import {
   useCanvasStore,
   saveCanvasToLocalStorage,
   loadCanvasFromLocalStorage,
 } from '../../stores/canvasStore';
+import { usePatternDetection } from '../../hooks/usePatternDetection';
 
 export const AppLayout: React.FC = () => {
   const [selectedNodeType, setSelectedNodeType] = useState<NodeType>('idea');
@@ -17,6 +19,9 @@ export const AppLayout: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { resetCanvas } = useCanvasStore();
+
+  // Add pattern detection (runs every 30 seconds)
+  usePatternDetection(30000);
 
   // Load saved state on mount
   useEffect(() => {
@@ -71,6 +76,7 @@ export const AppLayout: React.FC = () => {
           selectedNodeType={selectedNodeType}
         />
         <CanvasControls />
+        <InterventionPanel />
 
         {/* Help panel */}
         <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-4 max-w-xs">
