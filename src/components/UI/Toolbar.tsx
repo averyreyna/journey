@@ -28,7 +28,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   return (
     <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
       <div className="flex items-center gap-4">
-        <h1 className="text-xl font-bold text-gray-800">Journey Canvas</h1>
+        <h1 className="text-xl font-bold text-gray-800">Journey</h1>
         <div className="h-6 w-px bg-gray-300" />
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium text-gray-700">Node Type:</span>

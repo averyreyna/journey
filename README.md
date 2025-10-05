@@ -1,4 +1,4 @@
-# Journey Canvas
+# Journey
 
 A canvas-based writing assistant that reimagines how writers approach composition through spatial thinking and metacognitive support.
 

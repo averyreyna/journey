@@ -116,7 +116,7 @@ export class DocumentGenerator {
    * Generate markdown from ordered nodes
    */
   private generateMarkdown(orderedNodes: NodeWithDepth[]): string {
-    let markdown = '# Journey Canvas Export\n\n';
+    let markdown = '# Journey Export\n\n';
     markdown += `*Exported on ${new Date().toLocaleString()}*\n\n`;
     markdown += '---\n\n';
 
@@ -163,7 +163,7 @@ export class DocumentGenerator {
       return 'Empty Canvas\n\nNo content to export.';
     }
 
-    let text = 'JOURNEY CANVAS EXPORT\n';
+    let text = 'Journey EXPORT\n';
     text += `Exported on ${new Date().toLocaleString()}\n`;
     text += '='.repeat(50) + '\n\n';
 
